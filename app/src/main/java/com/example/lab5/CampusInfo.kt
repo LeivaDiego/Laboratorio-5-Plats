@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.lab5.ui.theme.Lab5Theme
 
-class MainActivity : ComponentActivity() {
+class CampusInfo : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,25 +22,25 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainMenu()
+                    Greeting("Android")
                 }
             }
         }
     }
 }
-@Preview(showBackground = true)
-@Composable
-fun MainMenuPreview() {
-    Lab5Theme {
-        MainMenu()
-    }
-}
 
 @Composable
-fun MainMenu(modifier: Modifier = Modifier) {
+fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Bienvenido a la App Interactiva",
+        text = "Hello $name!",
         modifier = modifier
     )
 }
 
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview2() {
+    Lab5Theme {
+        Greeting("Android")
+    }
+}
