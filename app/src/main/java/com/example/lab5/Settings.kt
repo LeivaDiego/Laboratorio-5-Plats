@@ -2,6 +2,7 @@ package com.example.lab5
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -46,6 +48,8 @@ class Settings : ComponentActivity() {
     }
 }
 
+
+
 @Preview(showBackground = true)
 @Composable
 fun SettingsPreview() {
@@ -57,6 +61,11 @@ fun SettingsPreview() {
 
 @Composable
 fun SettingsPage(){
+    val context = LocalContext.current
+    BackHandler {
+        context.findActivity()?.finish()
+    }
+
     Surface {
         val prof = painterResource(id = R.drawable.profile)
         val mail = painterResource(id = R.drawable.email)

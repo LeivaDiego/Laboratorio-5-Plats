@@ -2,6 +2,7 @@ package com.example.lab5
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -58,9 +60,14 @@ fun EmergencyPreview() {
     }
 }
 
+
 @Composable
-fun EmergencyContacts()
-{
+fun EmergencyContacts() {
+    val context = LocalContext.current
+    BackHandler {
+        context.findActivity()?.finish()
+    }
+
     Surface {
         val alert = painterResource(id = R.drawable.emergency)
         val phoner = painterResource(id = R.drawable.call)

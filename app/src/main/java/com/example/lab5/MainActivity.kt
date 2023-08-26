@@ -1,5 +1,7 @@
 package com.example.lab5
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -39,6 +41,13 @@ fun MainMenuPreview() {
     Lab5Theme {
         MainMenu()
     }
+}
+
+// Reference: https://stackoverflow.com/questions/75633491/on-back-pressed-finish-the-activity-in-jetpack-compose
+fun Context.findActivity(): ComponentActivity? = when (this) {
+    is ComponentActivity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
 }
 
 @Composable
