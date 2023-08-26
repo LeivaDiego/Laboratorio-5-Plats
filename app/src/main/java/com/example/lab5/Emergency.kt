@@ -1,11 +1,13 @@
 package com.example.lab5
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -64,6 +66,7 @@ fun EmergencyPreview() {
 @Composable
 fun EmergencyContacts() {
     val context = LocalContext.current
+
     BackHandler {
         context.findActivity()?.finish()
     }
@@ -81,16 +84,17 @@ fun EmergencyContacts() {
                 modifier = Modifier.fillMaxWidth())
             {
                 Image(painter = back,
-                    contentDescription = "Back Arrow",
-                    modifier = Modifier
-                        .absoluteOffset(0.dp, 16.dp)
-                        .size(40.dp))
+                      contentDescription = "Back Arrow",
+                      modifier = Modifier
+                          .size(40.dp)
+                          .absoluteOffset(x=0.dp, y=16.dp)
+                          .clickable { context.startActivity(Intent(context, MainActivity::class.java)) })
 
                 Text(text = "Contactos de Emergencia",
-                    style = TextStyle(color = Color.Black, fontSize = 26.sp, FontWeight.Bold),
+                    style = TextStyle(Color.Black, fontSize = 26.sp, FontWeight.Bold),
                     modifier = Modifier.padding(20.dp))
 
-                Text(text = "  ")
+                Text(text = " ")
             }
 
             Divider(color = Color.Gray, thickness = 1.dp)

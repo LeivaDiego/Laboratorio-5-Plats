@@ -43,7 +43,6 @@ fun MainMenuPreview() {
     }
 }
 
-// Reference: https://stackoverflow.com/questions/75633491/on-back-pressed-finish-the-activity-in-jetpack-compose
 fun Context.findActivity(): ComponentActivity? = when (this) {
     is ComponentActivity -> this
     is ContextWrapper -> baseContext.findActivity()
@@ -53,29 +52,31 @@ fun Context.findActivity(): ComponentActivity? = when (this) {
 @Composable
 fun MainMenu() {
     val mContext = LocalContext.current
+    Surface {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Button(onClick = { mContext.startActivity(Intent(mContext, CampusInfo::class.java)) })
+            {
+                Text("Ir a Campus")
+            }
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Button(onClick = { mContext.startActivity(Intent(mContext, CampusInfo::class.java)) })
-        {
-            Text("Ir a Campus")
-        }
+            Button(onClick = { mContext.startActivity(Intent(mContext, MyProfile::class.java)) })
+            {
+                Text("Ir a Mi Perfil")
+            }
 
-        Button(onClick = { mContext.startActivity(Intent(mContext, MyProfile::class.java)) })
-        {
-            Text("Ir a Mi Perfil")
-        }
+            Button(onClick = { mContext.startActivity(Intent(mContext, Settings::class.java)) })
+            {
+                Text("Ir a Configuración")
+            }
 
-        Button(onClick = { mContext.startActivity(Intent(mContext, Settings::class.java)) })
-        {
-            Text("Ir a Configuración")
-        }
-
-        Button(onClick = { mContext.startActivity(Intent(mContext, Emergency::class.java)) })
-        {
-            Text("Ir a Emergencias")
+            Button(onClick = { mContext.startActivity(Intent(mContext, Emergency::class.java)) })
+            {
+                Text("Ir a Emergencias")
+            }
         }
     }
+
 }

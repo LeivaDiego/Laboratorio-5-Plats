@@ -1,15 +1,18 @@
 package com.example.lab5
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -62,6 +65,7 @@ fun CampusInfoPreview() {
 @Composable
 fun CampusInfoPage() {
     val context = LocalContext.current
+
     BackHandler {
         context.findActivity()?.finish()
     }
@@ -76,17 +80,28 @@ fun CampusInfoPage() {
 }
 
 
-
 @Composable
 fun CentralCampus(){
     val campus = painterResource(id = R.drawable.central_campus)
+    val back = painterResource(id = R.drawable.back)
+    val context = LocalContext.current
     Column(horizontalAlignment = Alignment.CenterHorizontally)
     {
-        Row ()
+        Row (horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth())
         {
+            Image(painter = back,
+                contentDescription = "Back Arrow",
+                modifier = Modifier
+                    .absoluteOffset(0.dp, 16.dp)
+                    .size(40.dp)
+                    .clickable { context.startActivity(Intent(context, MainActivity::class.java)) })
+
             Text(text = "Campus Central",
                 style = TextStyle(color = Color.Black, fontSize = 26.sp, fontWeight = FontWeight.Bold),
                 modifier = Modifier.padding(20.dp))
+
+            Text(text = "       ")
         }
         Image(painter = campus,
             contentDescription = "Front Page Image",

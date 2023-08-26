@@ -1,10 +1,12 @@
 package com.example.lab5
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -64,6 +66,7 @@ fun MyProfilePreview() {
 @Composable
 fun MyProfilePage(){
     val context = LocalContext.current
+
     BackHandler {
         context.findActivity()?.finish()
     }
@@ -79,17 +82,24 @@ fun MyProfilePage(){
 
 @Composable
 fun Profile(){
+    val context = LocalContext.current
     val avatar = painterResource(id = R.drawable.profile_pic)
     val configur = painterResource(id = R.drawable.settings)
     val bgprofile = painterResource(id = R.drawable.profile_background)
     val circulo = painterResource(id = R.drawable.circle)
+    val back = painterResource(id = R.drawable.back)
 
     Column(horizontalAlignment = Alignment.CenterHorizontally)
     {
         Row (horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth())
         {
-            Text(text = "   ")
+            Image(painter = back,
+                  contentDescription = "Back Arrow",
+                  modifier = Modifier
+                      .absoluteOffset(0.dp, 16.dp)
+                      .size(40.dp)
+                      .clickable { context.startActivity(Intent(context, MainActivity::class.java)) })
 
             Text(text = "Mi Perfil",
                 style = TextStyle(color = Color.Black, fontSize = 26.sp, fontWeight = FontWeight.Bold),

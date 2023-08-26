@@ -1,10 +1,12 @@
 package com.example.lab5
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -62,6 +64,7 @@ fun SettingsPreview() {
 @Composable
 fun SettingsPage(){
     val context = LocalContext.current
+
     BackHandler {
         context.findActivity()?.finish()
     }
@@ -85,7 +88,8 @@ fun SettingsPage(){
                     contentDescription = "Back Arrow",
                     modifier = Modifier
                         .absoluteOffset(0.dp, 16.dp)
-                        .size(40.dp))
+                        .size(40.dp)
+                        .clickable { context.startActivity(Intent(context, MainActivity::class.java)) })
 
                 Text(text = "Configuración",
                     style = TextStyle(color = Color.Black, fontSize = 26.sp, fontWeight = FontWeight.Bold),
